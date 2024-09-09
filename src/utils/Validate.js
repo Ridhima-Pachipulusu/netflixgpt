@@ -3,11 +3,11 @@ const Validate=(email,password)=>{
     const isPasswordValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password);
     if(!isEmailValid)
         {
-             return "Email,password is/are not valid";
+             return "Email and/or password not valid";
         }
     if(!isPasswordValid) 
         {
-            return "Email,password is/are not valid";
+            return "Email and/or password not valid";
         }
     return null;
 } 

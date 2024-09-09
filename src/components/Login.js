@@ -1,15 +1,59 @@
 import Header from "./Header";
 import { useRef, useState } from "react";
 import Validate from "../utils/Validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [userNotFound,setUserNotFound]=useState(false);
+  const navigate=useNavigate();
   const email = useRef();
   const password = useRef();
   const toggleSignIn = () => {
     setIsSignIn(!isSignIn);
   };
   const handleClick = () => {
-    console.log(Validate(email.current.value, password.current.value));
+    const message = Validate(email.current.value, password.current.value);
+    setErrorMessage(message);
+    if (message) return;
+    if (!isSignIn) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if(errorCode)
+          {
+            setUserNotFound(true);
+          }
+        });
+    }
   };
   return (
     <div>
@@ -45,6 +89,8 @@ const Login = () => {
             placeholder="Password"
             className="w-full h-12 p-6  bg-transparent border text-white border-gray-600 m-4 ml-0 rounded-md bg-slate-950"
           />
+          <p className=" text-red-600">{errorMessage}</p>
+          <p className=" text-red-600">{userNotFound && !errorMessage? "User not found" : ""}</p>
           <input
             onClick={handleClick}
             type="submit"

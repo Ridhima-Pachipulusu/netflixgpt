@@ -31,13 +31,10 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          navigate("/browse");
           updateProfile(user, {
             displayName: name.current.value,
           })
-            .then(() => {
-              navigate("/browse");
-            })
+            .then(() => {})
             .catch((error) => {});
         })
         .catch((error) => {

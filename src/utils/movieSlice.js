@@ -11,5 +11,5 @@ const nowPlayingMovies=createSlice({
         state.list=action.payload;
     }}
 })
-const {addList}=nowPlayingMovies.actions;
+export const {addList}=nowPlayingMovies.actions;
 export default nowPlayingMovies.reducer;

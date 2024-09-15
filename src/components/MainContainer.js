@@ -6,11 +6,11 @@ export const MainContainer=()=>{
     const movies=useSelector((store)=>store.movies?.list);
     if(!movies) return;
     const movie=movies[0];
-    console.log(movie);
+    const {original_title,overview,id}=movie
     return (
       <div>
-        <TrailerTitle />
-        <Trailer />
+        <TrailerTitle title={original_title} overview={overview} />
+        <Trailer movie_id={id}/>
       </div>
     );
 }

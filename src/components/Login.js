@@ -7,12 +7,10 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [userNotFound, setUserNotFound] = useState(false);
-  const navigate = useNavigate();
   const name = useRef();
   const email = useRef();
   const password = useRef();
@@ -105,7 +103,7 @@ const Login = () => {
             <input
               onClick={handleClick}
               type="submit"
-              className=" bg-red-600 text-white font-semibold w-full p-3 m-4 ml-0 rounded-md cursor-pointer"
+              className=" hover:bg-opacity-80 bg-red-600 text-white font-semibold w-full p-3 m-4 ml-0 rounded-md cursor-pointer"
             />
           </form>
           <p className="  text-white mt-3">

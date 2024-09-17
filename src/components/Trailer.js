@@ -6,7 +6,7 @@ export const Trailer=({movie_id})=>{
     const trailerplay = useSelector((store) => store.movies?.trailerVideo);
     useMovieTrailer(movie_id);
     return (
-      <div className=" w-screen -mt-10">
+      <div className=" w-screen ">
         <iframe
           className=" w-screen aspect-video mt-0"
           src={

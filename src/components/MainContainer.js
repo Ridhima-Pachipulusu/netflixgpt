@@ -5,7 +5,7 @@ import { TrailerTitle } from "./TrailerTiltle"
 export const MainContainer=()=>{
     const movies=useSelector((store)=>store.movies?.list);
     if(!movies) return;
-    const movie=movies[0];
+    const movie=movies[2];
     const {original_title,overview,id}=movie
     return (
       <div>

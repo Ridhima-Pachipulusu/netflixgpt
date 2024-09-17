@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
+import { gptPageDisplay } from "../utils/gptSearchSlice";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,10 +27,14 @@ const Header = () => {
       .then(() => {})
       .catch((error) => {});
   };
+  const handleGptSearch=()=>{
+    dispatch(gptPageDisplay())
+  }
   return (
-    <div className=" w-full absolute h-20 bg-gradient-to-b from-black mt-10">
+    <div className=" w-full absolute h-20 bg-gradient-to-b from-black">
       {users && (
         <div className="relative z-50 float-right mr-10 mt-3 flex flex-row">
+          <button className=" text-white bg-violet-900 rounded-lg px-4 py-2 mr-2" onClick={handleGptSearch}>GPTSearch</button>
           <img className="w-12 h-12 " src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png?20201013161117" />
           <button onClick={handleSignOut} className=" text-white font-semibold">
             (SignOut)

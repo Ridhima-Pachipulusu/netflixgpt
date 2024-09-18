@@ -1,7 +1,6 @@
 import MovieCard from "./MovieCard";
 
 const MoviesList=({title,listOfMovies})=>{
-    console.log(listOfMovies)
     return (
       <div className=" flex overflow-x-scroll scrollbar-hide ml-16">
         <div>

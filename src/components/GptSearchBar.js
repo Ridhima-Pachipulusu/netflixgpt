@@ -3,7 +3,6 @@ import groq from "../utils/OpenAi";
 import { Options } from "../utils/Constants";
 import { useDispatch } from "react-redux";
 import { addGptResults } from "../utils/gptSearchSlice";
-import { Shimmer } from "./Shimmer";
 
 const GptSearchBar = () => {
   const searchContext = useRef(null); 
@@ -46,7 +45,6 @@ const GptSearchBar = () => {
     const movieNames = chatCompletion.choices[0].message.content.split(",");
     const getpromisesArray=movieNames.map(movie => callTmdb(movie));
     const result=await Promise.all(getpromisesArray);
-    console.log(result)
     dispatch(addGptResults({movienames:movieNames,results:result}));
     setLoading(false);
   };
@@ -74,7 +72,7 @@ const GptSearchBar = () => {
         </form>
         {loading && <div className="text-white mt-4">Loading...</div>}
       </div>
-      <p className=" text-white ml-96 text-sm w-1/2">
+      <p className=" text-white ml-96 text-sm w-[660px]">
         NOTE:The data displayed here May or May not be relevent as tmdb api
         searches based on single keyword for the results provided by ai.""For example if you search for the movie maestro,it gives results of all movies which includes the word maestro"".Same applied to all prompts.
       </p>

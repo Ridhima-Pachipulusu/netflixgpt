@@ -16,6 +16,11 @@ const Login = () => {
   const password = useRef();
   const toggleSignIn = () => {
     setIsSignIn(!isSignIn);
+    name.current && (name.current.value = "");
+    email.current.value = "";
+    password.current.value = "";
+    setErrorMessage(null);
+    setUserNotFound(false);
   };
   const handleClick = () => {
     const message = Validate(email.current.value, password.current.value);
